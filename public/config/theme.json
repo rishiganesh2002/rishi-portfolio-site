@@ -1,0 +1,20 @@
+{
+  "textColor": "#1f2937",
+  "backgroundColor": "#ffffff",
+  "buttonTextColor": "#ffffff",
+  "buttonBackgroundColor": "#3b82f6",
+  "customColors": {
+    "primary": "#3b82f6",
+    "secondary": "#6366f1",
+    "accent": "#8b5cf6",
+    "success": "#10b981",
+    "warning": "#f59e0b",
+    "error": "#ef4444",
+    "muted": "#6b7280",
+    "border": "#e5e7eb"
+  },
+  "fontFamily": {
+    "heading": "var(--font-geist-sans)",
+    "body": "var(--font-geist-sans)"
+  }
+}
