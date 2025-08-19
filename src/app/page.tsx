@@ -8,12 +8,12 @@ export default function Home() {
   const theme = useTheme();
 
   return (
-    <div className="font-sans min-h-screen p-8 pb-20 sm:p-20">
-      <div className="flex flex-col items-center justify-center pt-12">
+    <div className="font-sans min-h-screen pb-20 sm:p-10">
+      <div className="flex flex-col items-center justify-center">
         <Canvas
           shadows
-          camera={{ position: [0, 2, 5], fov: 25 }}
-          style={{ width: "50vw", height: "50vh" }}
+          camera={{ position: [0, 3, 5], fov: 25 }}
+          style={{ width: "60vw", height: "60vh" }}
         >
           <color attach="background" args={[theme.backgroundColor]} />
           <Experience />
