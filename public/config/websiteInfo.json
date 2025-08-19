@@ -1,4 +1,8 @@
 {
+  "homeData": {
+    "header": "Welcome to My Digital World",
+    "information": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. With expertise in modern web technologies and a keen eye for design, I build applications that not only function flawlessly but also provide exceptional user experiences."
+  },
   "navigation": [
     { "name": "Home", "href": "/" },
     { "name": "Experience", "href": "/experience" },

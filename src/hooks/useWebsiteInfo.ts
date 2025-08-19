@@ -13,7 +13,13 @@ export interface SocialLink {
   iconType: string;
 }
 
+export interface HomeData {
+  header: string;
+  information: string;
+}
+
 export interface WebsiteInfo {
+  homeData: HomeData;
   navigation: NavigationItem[];
   socialLinks: SocialLink[];
 }
