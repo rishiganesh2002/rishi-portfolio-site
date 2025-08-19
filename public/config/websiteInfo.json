@@ -20,6 +20,11 @@
       "name": "Email",
       "href": "mailto:rishi.ganesh232@gmail.com",
       "iconType": "email"
+    },
+    {
+      "name": "Blog",
+      "href": "https://rishigr.substack.com/?utm_campaign=personal-website",
+      "iconType": "substack"
     }
   ]
 }
