@@ -1,0 +1,25 @@
+{
+  "navigation": [
+    { "name": "Home", "href": "/" },
+    { "name": "Experience", "href": "/experience" },
+    { "name": "Projects", "href": "/projects" },
+    { "name": "Gallery", "href": "/gallery" }
+  ],
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "href": "https://github.com/rishiganesh2002",
+      "iconType": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/in/rishiganeshr/",
+      "iconType": "linkedin"
+    },
+    {
+      "name": "Email",
+      "href": "mailto:rishi.ganesh232@gmail.com",
+      "iconType": "email"
+    }
+  ]
+}
