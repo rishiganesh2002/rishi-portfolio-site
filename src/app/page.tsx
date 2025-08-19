@@ -1,6 +1,12 @@
 "use client";
 import Experience from "../components/home/avatar/Experience";
 import Introduction from "../components/home/Introduction";
+import Values from "../components/home/Values";
+import {
+  IntroductionSkeleton,
+  ValuesSkeleton,
+  CanvasSkeleton,
+} from "../components/common/Skeletons";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useTheme } from "../context/ThemeContext";
@@ -12,23 +18,39 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="font-sans min-h-screen pb-20 sm:p-10 flex items-center justify-center">
-        <div>Loading...</div>
-      </div>
+      <>
+        {/* Canvas and Introduction Section */}
+        <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-10 space-y-8">
+          <CanvasSkeleton />
+          <IntroductionSkeleton />
+        </section>
+
+        {/* Values Section */}
+        <section className="h-screen flex flex-col items-center justify-start p-4 sm:p-10 pt-16">
+          <ValuesSkeleton />
+        </section>
+      </>
     );
   }
 
   if (error || !websiteInfo) {
     return (
       <div className="font-sans min-h-screen pb-20 sm:p-10 flex items-center justify-center">
-        <div>Error loading website information</div>
+        <div className="text-center">
+          <div className="text-2xl mb-4">⚠️</div>
+          <div>Error loading website information</div>
+          <div className="text-sm text-gray-500 mt-2">
+            Please try refreshing the page
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="font-sans min-h-screen pb-20 sm:p-10">
-      <div className="flex flex-col items-center justify-center">
+    <>
+      {/* Canvas and Introduction Section */}
+      <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-10 space-y-8">
         <Canvas
           shadows
           camera={{ position: [0, 3, 5], fov: 25 }}
@@ -43,7 +65,12 @@ export default function Home() {
           header={websiteInfo.homeData.header}
           text={websiteInfo.homeData.information}
         />
-      </div>
-    </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="h-screen flex flex-col items-center justify-start p-4 sm:p-10 pt-16">
+        <Values values={websiteInfo.homeData.values} />
+      </section>
+    </>
   );
 }

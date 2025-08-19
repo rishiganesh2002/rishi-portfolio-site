@@ -16,6 +16,7 @@ export interface SocialLink {
 export interface HomeData {
   header: string;
   information: string;
+  values: string[];
 }
 
 export interface WebsiteInfo {

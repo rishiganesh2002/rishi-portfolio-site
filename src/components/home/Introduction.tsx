@@ -32,7 +32,7 @@ const Introduction: React.FC<IntroductionProps> = ({ header, text }) => {
   }, [isTyping, currentIndex, text]);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4">
       <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
         {header}
       </h1>

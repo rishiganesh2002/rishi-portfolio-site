@@ -1,7 +1,15 @@
 {
   "homeData": {
     "header": "Welcome to My Digital World",
-    "information": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. With expertise in modern web technologies and a keen eye for design, I build applications that not only function flawlessly but also provide exceptional user experiences."
+    "information": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. With expertise in modern web technologies and a keen eye for design, I build applications that not only function flawlessly but also provide exceptional user experiences.",
+    "values": [
+      "Code should be clean, maintainable, and purposeful",
+      "User experience is just as important as functionality",
+      "Continuous learning and adaptation drive innovation",
+      "Collaboration and open communication lead to better solutions",
+      "Technology should solve real problems and add genuine value",
+      "Quality over quantity - doing things right the first time"
+    ]
   },
   "navigation": [
     { "name": "Home", "href": "/" },
