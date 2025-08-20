@@ -58,7 +58,7 @@ export default function Home() {
         >
           <color attach="background" args={[theme.backgroundColor]} />
           <Experience />
-          <OrbitControls enableZoom={false} />
+          <OrbitControls enableZoom={false} enableRotate={false} />
         </Canvas>
 
         <Introduction
@@ -68,7 +68,7 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section className="h-screen flex flex-col items-center justify-start p-4 sm:p-10 pt-16">
+      <section className="flex flex-col items-center justify-start p-4 sm:p-10 pt-16 pb-16">
         <Values values={websiteInfo.homeData.values} />
       </section>
     </>
