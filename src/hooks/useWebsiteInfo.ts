@@ -19,10 +19,24 @@ export interface HomeData {
   values: string[];
 }
 
+export interface Experience {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  orientation: "left" | "right";
+}
+
+export interface ExperienceData {
+  experiences: Experience[];
+}
+
 export interface WebsiteInfo {
   homeData: HomeData;
   navigation: NavigationItem[];
   socialLinks: SocialLink[];
+  experienceData: ExperienceData;
 }
 
 export function useWebsiteInfo() {

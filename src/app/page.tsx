@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <>
       {/* Canvas and Introduction Section */}
-      <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-10 space-y-8">
+      <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-10 space-y-2">
         <Canvas
           shadows
           camera={{ position: [0, 3, 5], fov: 25 }}

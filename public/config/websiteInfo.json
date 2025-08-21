@@ -38,5 +38,33 @@
       "href": "https://rishigr.substack.com/?utm_campaign=personal-website",
       "iconType": "substack"
     }
-  ]
+  ],
+  "experienceData": {
+    "experiences": [
+      {
+        "id": "software-development",
+        "title": "Software Development Journey",
+        "description": "Started my coding journey with curiosity and determination, learning the fundamentals of programming and software design.\n\nEvolved from writing simple scripts to architecting complex, scalable applications that serve thousands of users worldwide.",
+        "imageSrc": "/EY_logo.png",
+        "imageAlt": "Software development workspace",
+        "orientation": "left"
+      },
+      {
+        "id": "full-stack-expertise",
+        "title": "Full-Stack Expertise",
+        "description": "Mastered both frontend and backend technologies, becoming proficient in modern frameworks like React, Next.js, and Node.js.\n\nBuilt end-to-end solutions that seamlessly integrate beautiful user interfaces with robust server-side logic and database management.",
+        "imageSrc": "/EY_logo.png",
+        "imageAlt": "Full-stack development illustration",
+        "orientation": "right"
+      },
+      {
+        "id": "innovation-leadership",
+        "title": "Innovation & Leadership",
+        "description": "Led technical teams in delivering cutting-edge solutions, fostering collaboration and driving innovation in fast-paced environments.\n\nMentored junior developers and contributed to open-source projects, sharing knowledge and building stronger development communities.",
+        "imageSrc": "/EY_logo.png",
+        "imageAlt": "Team collaboration and leadership",
+        "orientation": "left"
+      }
+    ]
+  }
 }
