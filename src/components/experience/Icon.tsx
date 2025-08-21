@@ -26,7 +26,7 @@ export default function Icon({
           alt={alt}
           width={width}
           height={height}
-          className="transition-transform duration-500 ease-in-out group-hover:rotate-12 object-cover"
+          className="transition-transform duration-700 ease-out object-cover group-hover:[transform:rotateY(360deg)]"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
