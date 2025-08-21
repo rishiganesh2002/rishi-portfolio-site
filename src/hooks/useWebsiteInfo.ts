@@ -32,11 +32,16 @@ export interface ExperienceData {
   experiences: Experience[];
 }
 
+export interface GalleryData {
+  imageUrls: string[];
+}
+
 export interface WebsiteInfo {
   homeData: HomeData;
   navigation: NavigationItem[];
   socialLinks: SocialLink[];
   experienceData: ExperienceData;
+  galleryData: GalleryData;
 }
 
 export function useWebsiteInfo() {
