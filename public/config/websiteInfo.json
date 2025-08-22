@@ -1,14 +1,13 @@
 {
   "homeData": {
-    "header": "Welcome to My Digital World",
-    "information": "I'm a passionate developer who loves creating innovative solutions and bringing ideas to life through code. With expertise in modern web technologies and a keen eye for design, I build applications that not only function flawlessly but also provide exceptional user experiences.",
+    "header": "Hey ✌🏾 I'm Rishi",
+    "information": "I like solving problems and living moments that will become stories",
     "values": [
-      "Code should be clean, maintainable, and purposeful",
-      "User experience is just as important as functionality",
-      "Continuous learning and adaptation drive innovation",
-      "Collaboration and open communication lead to better solutions",
-      "Technology should solve real problems and add genuine value",
-      "Quality over quantity - doing things right the first time"
+      "There's a lot of people who know a lot more than I do - I want to learn from them",
+      "Make friends from all walks of life - they'll just help you try new things",
+      "If I think its going to work I will full send it",
+      "Show up and be greatful - the things you want will come your way",
+      "Be unapologetically yourself and you'll attract the people you want to spend time with"
     ]
   },
   "navigation": [
@@ -41,45 +40,67 @@
   "experienceData": {
     "experiences": [
       {
-        "id": "software-development",
-        "title": "Software Development Journey",
-        "description": "Started my coding journey with curiosity and determination, learning the fundamentals of programming and software design.\n\nEvolved from writing simple scripts to architecting complex, scalable applications that serve thousands of users worldwide.",
-        "imageSrc": "/EY_logo.png",
-        "imageAlt": "Software development workspace",
-        "orientation": "left"
+        "id": "inika",
+        "title": "Inika",
+        "description": "Joined my friends out of college to build an AI-native ecommerce platform. We scaled from zero to ~20 signed customers after raising pre-seed funding.\n\nBuilt the core storefront experience that 18 live stores use - everything from shopping carts and checkout to real-time inventory. Also shipped conversational commerce where customers can chat with AI to find products, which boosted click-through rates and handled almost half of customer support tickets.\n\nCreated analytics dashboards where you can literally talk to your data and get instant charts, plus unified ad management across Google, Meta, TikTok that uses AI to auto-generate campaigns.",
+        "imageSrc": "/project_inika_logo.jpeg",
+        "imageAlt": "Inika Logo",
+        "orientation": "left",
+        "dates": "May 2025 - Present"
       },
       {
-        "id": "full-stack-expertise",
-        "title": "Full-Stack Expertise",
-        "description": "Mastered both frontend and backend technologies, becoming proficient in modern frameworks like React, Next.js, and Node.js.\n\nBuilt end-to-end solutions that seamlessly integrate beautiful user interfaces with robust server-side logic and database management.",
-        "imageSrc": "/EY_logo.png",
-        "imageAlt": "Full-stack development illustration",
-        "orientation": "right"
+        "id": "stealth-startup",
+        "title": "Stealth Startup",
+        "description": "Worked at a stealth startup building AI for customer service ticket resolution across Southeast Asia. Built pipelines to wrangle messy data from 40+ locations into something actually useful for training AI models.\n\nAlso created a Telegram bot for customer service that was smart enough to figure out which team should handle each ticket - cut response times by 1-2 days which was huge for customer satisfaction.",
+        "imageSrc": "/stealth_logo.png",
+        "imageAlt": "Stealth startup logo",
+        "orientation": "right",
+        "dates": "March 2024 - May 2024"
       },
       {
-        "id": "innovation-leadership",
-        "title": "Innovation & Leadership",
-        "description": "Led technical teams in delivering cutting-edge solutions, fostering collaboration and driving innovation in fast-paced environments.\n\nMentored junior developers and contributed to open-source projects, sharing knowledge and building stronger development communities.",
-        "imageSrc": "/EY_logo.png",
-        "imageAlt": "Team collaboration and leadership",
-        "orientation": "left"
+        "id": "linkt-ai",
+        "title": "Linkt AI",
+        "description": "Second engineering hire at a startup building computer vision for moving companies. Built a web app where movers could point their phone at stuff and it would automatically track inventory in real-time.\n\nThe cool part was implementing Kalman filtering to make the object detection super smooth across multiple video frames.",
+        "imageSrc": "/linktai_logo.jpeg",
+        "imageAlt": "Linkt AI logo",
+        "orientation": "left",
+        "dates": "Jan 2024 - March 2024"
+      },
+      {
+        "id": "ernst-young",
+        "title": "Ernst & Young",
+        "description": "Technology consulting intern where I got to work on some pretty cool stuff. Built a tool that could automatically suggest project teams by reading through tons of organizational data - like having an AI recruiter that knew everyone's skills.\n\nWon the EY GenAI Foundry Hackathon with that project! Also worked with the Special Olympics building secure data systems and custom validation features that kept 100+ users' data safe while making everything way more efficient.",
+        "imageSrc": "/ey_logo.png",
+        "imageAlt": "Ernst & Young logo",
+        "orientation": "right",
+        "dates": "June 2023 - August 2023"
+      },
+      {
+        "id": "georgia-tech-junior-design",
+        "title": "Georgia Tech Junior Design",
+        "description": "Worked on the Hand Heart and Soul Project with a local nonprofit to build them a better way to manage their events and data. Created a React Native app that cut their workflow time in half by making it super easy to input and visualize event information.\n\nBuilt an internal dashboard where different teams could actually talk to each other and track progress - sounds basic but made a huge difference for their team coordination. Also set up automatic CSV exports so they could easily share impact data with donors.",
+        "imageSrc": "/gt_logo.png",
+        "imageAlt": "Georgia Tech logo",
+        "orientation": "left",
+        "dates": "August 2022 - May 2023"
+      },
+      {
+        "id": "keysight-technologies",
+        "title": "Keysight Technologies",
+        "description": "Product management intern working on cybersecurity training materials for the sales team. Built a documentation website from scratch to cover product features that nobody had bothered to document before.\n\nAlso created training videos for customer onboarding that walked through network security assessments in AWS sandbox environments - basically made it way easier for new customers to actually understand what they were buying and for sales staff to pitch the product.",
+        "imageSrc": "/keysight_logo.png",
+        "imageAlt": "Keysight Technologies logo",
+        "orientation": "right",
+        "dates": "June 2022 - August 2022"
       }
     ]
   },
   "galleryData": {
     "imageUrls": [
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png",
-      "/EY_logo.png"
+      "https://f005.backblazeb2.com/file/ace-luffy-sabo/IMG_3478.JPG",
+      "https://f005.backblazeb2.com/file/ace-luffy-sabo/IMG_3167.JPG",
+      "https://f005.backblazeb2.com/file/ace-luffy-sabo/IMG_3425.JPG",
+      "https://f005.backblazeb2.com/file/ace-luffy-sabo/IMG_0305.JPG"
     ]
   }
 }

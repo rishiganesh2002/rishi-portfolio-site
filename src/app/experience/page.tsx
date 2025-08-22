@@ -3,7 +3,7 @@
 import React from "react";
 import { useWebsiteInfo } from "../../hooks/useWebsiteInfo";
 import { useTheme } from "../../context/ThemeContext";
-import Experience from "../../components/experience/Experience";
+import TimelineItem from "../../components/experience/TimelineItem";
 
 export default function ExperiencePage() {
   const { websiteInfo, loading, error } = useWebsiteInfo();
@@ -93,7 +93,7 @@ export default function ExperiencePage() {
               color: theme.textColor,
             }}
           >
-            Work Experience
+            My Work Experience
           </h1>
           <div
             className="w-24 h-1 mx-auto rounded-full"
@@ -101,20 +101,19 @@ export default function ExperiencePage() {
           />
         </div>
 
-        {/* Experience Sections */}
-        <div className="space-y-24">
+        {/* Timeline Experience Sections */}
+        <div className="space-y-4">
           {websiteInfo.experienceData.experiences.map((experience, index) => (
-            <Experience
+            <TimelineItem
               key={experience.id}
               title={experience.title}
               description={experience.description}
               imageSrc={experience.imageSrc}
               imageAlt={experience.imageAlt}
-              orientation={experience.orientation}
-              className={
-                index !== websiteInfo.experienceData.experiences.length - 1
-                  ? "pb-12"
-                  : ""
+              dates={experience.dates}
+              orientation={index % 2 === 0 ? "left" : "right"}
+              isLast={
+                index === websiteInfo.experienceData.experiences.length - 1
               }
             />
           ))}

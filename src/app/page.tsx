@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <>
       {/* Canvas and Introduction Section */}
-      <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-10 space-y-2">
+      <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-5 ">
         <Canvas
           shadows
           camera={{ position: [0, 3, 5], fov: 25 }}
@@ -68,7 +68,7 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section className="flex flex-col items-center justify-start p-4 sm:p-10 pt-16 pb-16">
+      <section className="flex flex-col items-center justify-start p-4 sm:p-10 pb-16">
         <Values values={websiteInfo.homeData.values} />
       </section>
     </>

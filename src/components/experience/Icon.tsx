@@ -20,13 +20,13 @@ export default function Icon({
 }: IconProps) {
   return (
     <div className={`group cursor-pointer ${className}`}>
-      <div className="relative overflow-hidden rounded-lg transition-transform duration-300 ease-in-out group-hover:scale-105">
+      <div className="relative overflow-hidden rounded-full transition-transform duration-300 ease-in-out group-hover:scale-105 aspect-square">
         <Image
           src={src}
           alt={alt}
           width={width}
           height={height}
-          className="transition-transform duration-700 ease-out object-cover group-hover:[transform:rotateY(360deg)]"
+          className="transition-transform duration-700 ease-out object-cover w-full h-full group-hover:[transform:rotateY(360deg)]"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

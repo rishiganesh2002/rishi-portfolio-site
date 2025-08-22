@@ -26,6 +26,7 @@ export interface Experience {
   imageSrc: string;
   imageAlt: string;
   orientation: "left" | "right";
+  dates: string;
 }
 
 export interface ExperienceData {
