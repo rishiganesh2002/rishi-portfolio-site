@@ -33,7 +33,7 @@ export default function Navbar({ navigation }: NavbarProps) {
   return (
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? "shadow-lg backdrop-blur-md" : "shadow-none"
+        isScrolled ? "shadow-lg backdrop-blur-md" : ""
       }`}
       style={{
         backgroundColor: isScrolled

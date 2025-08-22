@@ -90,7 +90,6 @@ export default function Footer({ navigation, socialLinks }: FooterProps) {
   return (
     <footer
       style={{
-        backgroundColor: theme.backgroundColor,
         color: theme.textColor,
       }}
     >

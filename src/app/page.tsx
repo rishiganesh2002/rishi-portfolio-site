@@ -50,12 +50,7 @@ export default function Home() {
   return (
     <>
       {/* Canvas and Introduction Section */}
-      <section
-        className="h-screen flex flex-col items-center justify-center p-4 sm:p-5 relative"
-        style={{
-          background: `linear-gradient(135deg, ${theme.backgroundColor} 0%, #1e293b 30%, #374151 60%, #4f46e5 100%)`,
-        }}
-      >
+      <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-5 relative">
         <Canvas
           shadows
           camera={{ position: [0, 3, 5], fov: 25 }}
@@ -72,12 +67,7 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section
-        className="flex flex-col items-center justify-start p-4 sm:p-10 pb-16 relative"
-        style={{
-          background: `linear-gradient(180deg, #4f46e5 0%, #374151 20%, #1e293b 50%, ${theme.backgroundColor} 100%)`,
-        }}
-      >
+      <section className="flex flex-col items-center justify-start p-4 sm:p-10 pb-16 relative">
         <Values values={websiteInfo.homeData.values} />
       </section>
     </>

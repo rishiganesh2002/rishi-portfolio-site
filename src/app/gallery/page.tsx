@@ -78,13 +78,7 @@ export default function Gallery() {
     );
   }
 
-  // Split images into 4 columns for masonry layout
   const imageUrls = websiteInfo.galleryData.imageUrls;
-  const columns: string[][] = [[], [], [], []];
-
-  imageUrls.forEach((imageUrl, index) => {
-    columns[index % 4].push(imageUrl);
-  });
 
   return (
     <div
@@ -110,30 +104,22 @@ export default function Gallery() {
         </div>
 
         {/* Masonry Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {columns.map((column, columnIndex) => (
-            <div key={columnIndex} className="grid gap-4">
-              {column.map((imageUrl, imageIndex) => (
-                <div
-                  key={`${columnIndex}-${imageIndex}`}
-                  className="group cursor-pointer"
-                >
-                  <div className="overflow-hidden rounded-lg transition-transform duration-300 ease-in-out group-hover:scale-105">
-                    <Image
-                      src={imageUrl}
-                      alt={`Gallery image ${
-                        columnIndex * Math.ceil(imageUrls.length / 4) +
-                        imageIndex +
-                        1
-                      }`}
-                      width={400}
-                      height={400}
-                      className="h-auto max-w-full rounded-lg object-cover"
-                      style={{ aspectRatio: "auto" }}
-                    />
-                  </div>
-                </div>
-              ))}
+        <div className="columns-2 md:columns-4 gap-4 space-y-0">
+          {imageUrls.map((imageUrl, index) => (
+            <div
+              key={index}
+              className="group cursor-pointer break-inside-avoid mb-4"
+            >
+              <div className="overflow-hidden rounded-lg transition-transform duration-300 ease-in-out group-hover:scale-105">
+                <Image
+                  src={imageUrl}
+                  alt={`Gallery image ${index + 1}`}
+                  width={400}
+                  height={400}
+                  className="w-full h-auto rounded-lg object-cover"
+                  style={{ aspectRatio: "auto" }}
+                />
+              </div>
             </div>
           ))}
         </div>
