@@ -9,11 +9,9 @@ import {
 } from "../components/common/Skeletons";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { useTheme } from "../context/ThemeContext";
 import { useWebsiteInfo } from "../hooks/useWebsiteInfo";
 
 export default function Home() {
-  const theme = useTheme();
   const { websiteInfo, loading, error } = useWebsiteInfo();
 
   if (loading) {
