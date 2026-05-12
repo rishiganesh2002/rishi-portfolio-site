@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useTheme } from "@/context";
 import { NavigationItem } from "@/hooks/useWebsiteInfo";
 
@@ -10,177 +10,240 @@ interface NavbarProps {
   navigation: NavigationItem[];
 }
 
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function getScrollFillProgress(
+  scrollOffset: number,
+  documentHeight: number,
+  viewportHeight: number
+) {
+  const scrollableHeight = Math.max(documentHeight - viewportHeight, 0);
+
+  if (scrollableHeight === 0) {
+    return 0;
+  }
+
+  return clamp(scrollOffset / scrollableHeight, 0, 1);
+}
+
+function hexToRgba(hex: string, alpha: number) {
+  const normalizedHex = hex.replace("#", "");
+  const safeAlpha = clamp(alpha, 0, 1);
+
+  if (normalizedHex.length !== 6) {
+    return hex;
+  }
+
+  const red = Number.parseInt(normalizedHex.slice(0, 2), 16);
+  const green = Number.parseInt(normalizedHex.slice(2, 4), 16);
+  const blue = Number.parseInt(normalizedHex.slice(4, 6), 16);
+
+  return `rgba(${red}, ${green}, ${blue}, ${safeAlpha})`;
+}
+
 export default function Navbar({ navigation }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const theme = useTheme();
+  const pathname = usePathname();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 20);
+    let frameId = 0;
+
+    const updateScrollProgress = () => {
+      frameId = 0;
+      setScrollProgress(
+        getScrollFillProgress(
+          window.scrollY,
+          document.documentElement.scrollHeight,
+          window.innerHeight
+        )
+      );
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScroll = () => {
+      if (frameId === 0) {
+        frameId = window.requestAnimationFrame(updateScrollProgress);
+      }
+    };
+
+    updateScrollProgress();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      if (frameId !== 0) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
+  const brandColor = hexToRgba(theme.textColor, 0.92);
+  const shellBorderColor = hexToRgba(theme.textColor, 0.12 + scrollProgress * 0.12);
+  const shellShadow = `0 14px 40px ${hexToRgba("#020617", 0.18 + scrollProgress * 0.18)}`;
+  const shellBackground = [
+    `linear-gradient(90deg, ${hexToRgba(theme.customColors.primary, 0.08 + scrollProgress * 0.2)} 0%, ${hexToRgba(theme.customColors.accent, 0.05 + scrollProgress * 0.12)} 45%, ${hexToRgba(theme.customColors.secondary, 0.08 + scrollProgress * 0.2)} 100%)`,
+    `linear-gradient(180deg, ${hexToRgba(theme.customColors.border, 0.58 + scrollProgress * 0.18)} 0%, ${hexToRgba("#0f172a", 0.78 + scrollProgress * 0.16)} 100%)`,
+  ].join(", ");
+
+  const activeItemBackground = hexToRgba(theme.textColor, 0.1 + scrollProgress * 0.08);
+  const mobileButtonBackground = hexToRgba(theme.textColor, 0.08 + scrollProgress * 0.08);
+  const mobileMenuBackground = [
+    `linear-gradient(180deg, ${hexToRgba(theme.customColors.primary, 0.1 + scrollProgress * 0.12)} 0%, ${hexToRgba(theme.customColors.secondary, 0.08 + scrollProgress * 0.12)} 100%)`,
+    `linear-gradient(180deg, ${hexToRgba(theme.customColors.border, 0.92)} 0%, ${hexToRgba("#0f172a", 0.96)} 100%)`,
+  ].join(", ");
 
   return (
-    <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? "shadow-lg backdrop-blur-md" : ""
-      }`}
-      style={{
-        backgroundColor: isScrolled
-          ? `${theme.customColors.border}f0` // 94% opacity - using border color for contrast
-          : "transparent",
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo/Brand */}
-          <div className="flex-shrink-0">
+    <nav className="sticky top-4 z-50 px-3 sm:px-5 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl lg:max-w-[50rem] xl:max-w-[56rem]">
+        <div
+          className="relative overflow-hidden rounded-full border backdrop-blur-xl transition-[background,border-color,box-shadow] duration-300"
+          style={{
+            background: shellBackground,
+            borderColor: shellBorderColor,
+            boxShadow: shellShadow,
+          }}
+        >
+          <div
+            className="pointer-events-none absolute inset-0 opacity-100 transition-opacity duration-300"
+            style={{
+              background: `linear-gradient(90deg, ${hexToRgba("#ffffff", 0.05)} 0%, transparent 22%, transparent 78%, ${hexToRgba("#ffffff", 0.04)} 100%)`,
+            }}
+          />
+
+          <div className="relative flex h-[4.5rem] items-center justify-between px-5 sm:px-6 lg:px-8">
             <Link
               href="/"
-              className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+              className="flex min-w-0 items-center transition-opacity duration-200 hover:opacity-80"
+              style={{
+                color: brandColor,
+                fontFamily: theme.fontFamily.heading,
+              }}
             >
-              <Image
-                src="/InitialLogo-transparent.png"
-                alt="Rishi Logo"
-                width={120}
-                height={120}
-                className="w-24 h-24 object-contain"
-              />
+              <span className="truncate text-lg tracking-[0.45em] sm:text-xl">
+                RISHI
+              </span>
             </Link>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navigation.map((item) => (
+            <div className="hidden md:flex md:items-center md:gap-2">
+              {navigation.map((item) => {
+                const isActive = pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300"
+                    style={{
+                      color: theme.textColor,
+                      fontFamily: theme.fontFamily.body,
+                      backgroundColor: isActive
+                        ? activeItemBackground
+                        : "transparent",
+                      boxShadow: isActive
+                        ? `inset 0 0 0 1px ${hexToRgba("#ffffff", 0.06)}`
+                        : "none",
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen((open) => !open)}
+                className="inline-flex items-center justify-center rounded-full p-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-inset"
+                style={{
+                  backgroundColor: mobileButtonBackground,
+                  color: theme.textColor,
+                }}
+                aria-expanded={isMenuOpen}
+                aria-label="Toggle navigation menu"
+              >
+                {!isMenuOpen ? (
+                  <svg
+                    className="block h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.8}
+                      d="M4 7h16M4 12h16M4 17h16"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="block h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.8}
+                      d="M6 6l12 12M18 6L6 18"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="mt-3 overflow-hidden rounded-[2rem] border backdrop-blur-xl transition-[max-height,opacity,transform] duration-300 ease-out md:hidden"
+          style={{
+            background: mobileMenuBackground,
+            borderColor: shellBorderColor,
+            boxShadow: shellShadow,
+            maxHeight: isMenuOpen ? "18rem" : "0rem",
+            opacity: isMenuOpen ? 1 : 0,
+            transform: isMenuOpen ? "translateY(0)" : "translateY(-0.5rem)",
+            pointerEvents: isMenuOpen ? "auto" : "none",
+          }}
+          aria-hidden={!isMenuOpen}
+        >
+          <div className="space-y-1 p-3">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+
+              return (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:opacity-80"
+                  className="block rounded-full px-4 py-3 text-base font-semibold transition-all duration-300"
                   style={{
                     color: theme.textColor,
                     fontFamily: theme.fontFamily.body,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = theme.customColors.accent;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = theme.textColor;
+                    backgroundColor: isActive
+                      ? activeItemBackground
+                      : "transparent",
                   }}
                 >
                   {item.name}
                 </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-inset"
-              style={{
-                backgroundColor: isScrolled
-                  ? theme.customColors.border
-                  : "rgba(255,255,255,0.1)",
-                color: theme.textColor,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.customColors.accent;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = isScrolled
-                  ? theme.customColors.border
-                  : "rgba(255,255,255,0.1)";
-              }}
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              {!isMenuOpen ? (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                    stroke={theme.textColor}
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                    stroke={theme.textColor}
-                  />
-                </svg>
-              )}
-            </button>
+              );
+            })}
           </div>
         </div>
       </div>
-
-      {/* Mobile Navigation Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden">
-          <div
-            className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t backdrop-blur-md"
-            style={{
-              backgroundColor: `${theme.customColors.border}f8`, // 97% opacity - consistent with navbar
-              borderColor: theme.customColors.border,
-            }}
-          >
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block px-3 py-2 rounded-md text-base font-medium transition-colors hover:opacity-80"
-                style={{
-                  color: theme.textColor,
-                  fontFamily: theme.fontFamily.body,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = theme.customColors.accent;
-                  e.currentTarget.style.backgroundColor =
-                    theme.customColors.border;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = theme.textColor;
-                  e.currentTarget.style.backgroundColor = "transparent";
-                }}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
