@@ -48,6 +48,15 @@
   "experienceData": {
     "experiences": [
       {
+        "id": "athena-intelligence",
+        "title": "Athena Intelligence",
+        "description": "Joined Athena as the 9th employee and ended up wearing a very product-plus-FDE kind of hat. I was one of the main technical owners across three Fortune 500 accounts, helping get pilots live, expand usage, and turn messy enterprise asks into AI workflows that actually shipped - which ended up driving around $2.9m in ARR.\n\nI also built out a lot of the infrastructure that made the product feel real behind the scenes. That meant everything from token usage and pricing systems that turned invoicing from a weekly manual chore into a roughly 10-minute workflow, to permissions, runtime data controls, Databricks connectivity, Neon, and collaborative editing.\n\nOne of the more fun things I worked on was AI-powered PowerPoint generation. We built flows that let users go from a prompt to a polished deck with solid styling, positioning, and real-time editing support without it feeling janky.",
+        "imageSrc": "/athena_intel_logo.jpeg",
+        "imageAlt": "Athena Intelligence logo",
+        "orientation": "left",
+        "dates": "October 2025 - Present"
+      },
+      {
         "id": "inika",
         "title": "Inika",
         "description": "Joined my friends out of college to build an AI-native ecommerce platform. We scaled from zero to ~20 signed customers after raising pre-seed funding.\n\nBuilt the core storefront experience that 18 live stores use - everything from shopping carts and checkout to real-time inventory. Also shipped conversational commerce where customers can chat with AI to find products, which boosted click-through rates and handled almost half of customer support tickets.\n\nCreated analytics dashboards where you can literally talk to your data and get instant charts, plus unified ad management across Google, Meta, TikTok that uses AI to auto-generate campaigns.",
