@@ -14,9 +14,17 @@ export interface SocialLink {
 }
 
 export interface HomeData {
-  header: string;
-  information: string;
+  eyebrow: string;
+  headline: string;
+  intro: string;
   values: string[];
+}
+
+interface RawHomeData {
+  eyebrow?: unknown;
+  headline?: unknown;
+  intro?: unknown;
+  values?: unknown;
 }
 
 export interface Experience {
@@ -45,6 +53,31 @@ export interface WebsiteInfo {
   galleryData: GalleryData;
 }
 
+function isString(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+function isStringArray(value: unknown): value is string[] {
+  return (
+    Array.isArray(value) && value.every((item) => typeof item === "string")
+  );
+}
+
+function normalizeHomeData(rawHomeData: RawHomeData | undefined): HomeData {
+  return {
+    eyebrow: isString(rawHomeData?.eyebrow)
+      ? rawHomeData.eyebrow
+      : "[missing homeData.eyebrow]",
+    headline: isString(rawHomeData?.headline)
+      ? rawHomeData.headline
+      : "[missing homeData.headline]",
+    intro: isString(rawHomeData?.intro)
+      ? rawHomeData.intro
+      : "[missing homeData.intro]",
+    values: isStringArray(rawHomeData?.values) ? rawHomeData.values : [],
+  };
+}
+
 export function useWebsiteInfo() {
   const [websiteInfo, setWebsiteInfo] = useState<WebsiteInfo | null>(null);
   const [loading, setLoading] = useState(true);
@@ -58,7 +91,10 @@ export function useWebsiteInfo() {
           throw new Error("Failed to fetch website info");
         }
         const data = await response.json();
-        setWebsiteInfo(data);
+        setWebsiteInfo({
+          ...data,
+          homeData: normalizeHomeData(data.homeData),
+        });
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
       } finally {

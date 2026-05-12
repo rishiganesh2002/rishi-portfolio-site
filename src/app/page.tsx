@@ -1,6 +1,6 @@
 "use client";
 import Experience from "../components/home/avatar/Experience";
-import Introduction from "../components/home/Introduction";
+import HeroCard from "../components/home/HeroCard";
 import Values from "../components/home/Values";
 import {
   IntroductionSkeleton,
@@ -17,13 +17,17 @@ export default function Home() {
   if (loading) {
     return (
       <>
-        {/* Canvas and Introduction Section */}
-        <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-10 space-y-8">
-          <CanvasSkeleton />
-          <IntroductionSkeleton />
+        <section className="px-4 pb-10 pt-8 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-10">
+            <div className="order-2 lg:order-1">
+              <IntroductionSkeleton />
+            </div>
+            <div className="order-1 lg:order-2">
+              <CanvasSkeleton />
+            </div>
+          </div>
         </section>
 
-        {/* Values Section */}
         <section className="h-screen flex flex-col items-center justify-start p-4 sm:p-10 pt-16">
           <ValuesSkeleton />
         </section>
@@ -47,24 +51,30 @@ export default function Home() {
 
   return (
     <>
-      {/* Canvas and Introduction Section */}
-      <section className="h-screen flex flex-col items-center justify-center p-4 sm:p-5 relative">
-        <Canvas
-          shadows
-          camera={{ position: [0, 3, 5], fov: 25 }}
-          style={{ width: "60vw", height: "60vh" }}
-        >
-          <Experience />
-          <OrbitControls enableZoom={false} enableRotate={false} />
-        </Canvas>
+      <section className="px-4 pb-10 pt-8 sm:px-6 lg:px-8">
+        <div className="mx-auto grid min-h-[calc(100vh-8rem)] max-w-7xl grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-10">
+          <div className="order-2 lg:order-1">
+            <HeroCard
+              homeData={websiteInfo.homeData}
+              socialLinks={websiteInfo.socialLinks}
+            />
+          </div>
 
-        <Introduction
-          header={websiteInfo.homeData.header}
-          text={websiteInfo.homeData.information}
-        />
+          <div className="order-1 flex items-center justify-center lg:order-2">
+            <div className="w-full max-w-[42rem]">
+              <Canvas
+                shadows
+                camera={{ position: [0, 3, 5], fov: 25 }}
+                style={{ width: "100%", height: "clamp(24rem, 60vh, 38rem)" }}
+              >
+                <Experience />
+                <OrbitControls enableZoom={false} enableRotate={false} />
+              </Canvas>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Values Section */}
       <section className="flex flex-col items-center justify-start p-4 sm:p-10 pb-16 relative">
         <Values values={websiteInfo.homeData.values} />
       </section>
