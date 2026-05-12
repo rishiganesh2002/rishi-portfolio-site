@@ -1,7 +1,7 @@
 "use client";
 import Experience from "../components/home/avatar/Experience";
 import HeroCard from "../components/home/HeroCard";
-import Values from "../components/home/Values";
+import PersonalEthos from "../components/home/PersonalEthos";
 import {
   IntroductionSkeleton,
   ValuesSkeleton,
@@ -28,7 +28,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="h-screen flex flex-col items-center justify-start p-4 sm:p-10 pt-16">
+        <section className="px-4 pb-16 pt-6 sm:px-6 sm:pt-10 lg:px-8">
           <ValuesSkeleton />
         </section>
       </>
@@ -75,8 +75,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col items-center justify-start p-4 sm:p-10 pb-16 relative">
-        <Values values={websiteInfo.homeData.values} />
+      <section className="px-4 pb-16 pt-2 sm:px-6 sm:pt-4 lg:px-8">
+        <PersonalEthos
+          eyebrow={websiteInfo.homeData.ethosEyebrow}
+          title={websiteInfo.homeData.ethosTitle}
+          intro={websiteInfo.homeData.ethosIntro}
+          items={websiteInfo.homeData.ethosItems}
+        />
       </section>
     </>
   );

@@ -13,18 +13,36 @@ export interface SocialLink {
   iconType: string;
 }
 
+export interface FooterData {
+  eyebrow: string;
+  headline: string;
+  description: string;
+}
+
 export interface HomeData {
   eyebrow: string;
   headline: string;
   intro: string;
-  values: string[];
+  ethosEyebrow: string;
+  ethosTitle: string;
+  ethosIntro: string;
+  ethosItems: string[];
 }
 
 interface RawHomeData {
   eyebrow?: unknown;
   headline?: unknown;
   intro?: unknown;
-  values?: unknown;
+  ethosEyebrow?: unknown;
+  ethosTitle?: unknown;
+  ethosIntro?: unknown;
+  ethosItems?: unknown;
+}
+
+interface RawFooterData {
+  eyebrow?: unknown;
+  headline?: unknown;
+  description?: unknown;
 }
 
 export interface Experience {
@@ -47,6 +65,7 @@ export interface GalleryData {
 
 export interface WebsiteInfo {
   homeData: HomeData;
+  footerData: FooterData;
   navigation: NavigationItem[];
   socialLinks: SocialLink[];
   experienceData: ExperienceData;
@@ -74,7 +93,34 @@ function normalizeHomeData(rawHomeData: RawHomeData | undefined): HomeData {
     intro: isString(rawHomeData?.intro)
       ? rawHomeData.intro
       : "[missing homeData.intro]",
-    values: isStringArray(rawHomeData?.values) ? rawHomeData.values : [],
+    ethosEyebrow: isString(rawHomeData?.ethosEyebrow)
+      ? rawHomeData.ethosEyebrow
+      : "[missing homeData.ethosEyebrow]",
+    ethosTitle: isString(rawHomeData?.ethosTitle)
+      ? rawHomeData.ethosTitle
+      : "[missing homeData.ethosTitle]",
+    ethosIntro: isString(rawHomeData?.ethosIntro)
+      ? rawHomeData.ethosIntro
+      : "[missing homeData.ethosIntro]",
+    ethosItems: isStringArray(rawHomeData?.ethosItems)
+      ? rawHomeData.ethosItems
+      : [],
+  };
+}
+
+function normalizeFooterData(
+  rawFooterData: RawFooterData | undefined
+): FooterData {
+  return {
+    eyebrow: isString(rawFooterData?.eyebrow)
+      ? rawFooterData.eyebrow
+      : "[missing footerData.eyebrow]",
+    headline: isString(rawFooterData?.headline)
+      ? rawFooterData.headline
+      : "[missing footerData.headline]",
+    description: isString(rawFooterData?.description)
+      ? rawFooterData.description
+      : "[missing footerData.description]",
   };
 }
 
@@ -94,6 +140,7 @@ export function useWebsiteInfo() {
         setWebsiteInfo({
           ...data,
           homeData: normalizeHomeData(data.homeData),
+          footerData: normalizeFooterData(data.footerData),
         });
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");

@@ -35,6 +35,11 @@ function LayoutContent({ children }: LayoutProps) {
     console.error("Failed to load website info:", error);
     // Fallback with minimal navigation
     const fallbackInfo = {
+      footerData: {
+        eyebrow: "[missing footerData.eyebrow]",
+        headline: "[missing footerData.headline]",
+        description: "[missing footerData.description]",
+      },
       navigation: [{ name: "Home", href: "/" }],
       socialLinks: [],
     };
@@ -44,7 +49,7 @@ function LayoutContent({ children }: LayoutProps) {
         <Navbar navigation={fallbackInfo.navigation} />
         <main className="flex-grow">{children}</main>
         <Footer
-          navigation={fallbackInfo.navigation}
+          footerData={fallbackInfo.footerData}
           socialLinks={fallbackInfo.socialLinks}
         />
       </div>
@@ -63,7 +68,7 @@ function LayoutContent({ children }: LayoutProps) {
       <Navbar navigation={websiteInfo.navigation} />
       <main className="flex-grow">{children}</main>
       <Footer
-        navigation={websiteInfo.navigation}
+        footerData={websiteInfo.footerData}
         socialLinks={websiteInfo.socialLinks}
       />
     </div>
