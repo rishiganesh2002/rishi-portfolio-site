@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import Icon from "./Icon";
 
@@ -22,217 +22,87 @@ export default function TimelineItem({
   imageAlt = "Experience image",
   dates,
   orientation = "left",
-  isLast = false,
   className = "",
 }: TimelineItemProps) {
   const theme = useTheme();
-
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const isLeft = orientation === "left";
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -80px 0px",
+      }
+    );
+
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const paragraphs = description.split("\n");
+  const accentGradient = isLeft
+    ? `linear-gradient(135deg, ${theme.customColors.primary}1f 0%, ${theme.customColors.accent}12 55%, transparent 100%)`
+    : `linear-gradient(225deg, ${theme.customColors.secondary}1f 0%, ${theme.customColors.primary}12 55%, transparent 100%)`;
+
   return (
-    <div className={`relative w-full py-8 ${className}`}>
-      {/* Central Timeline Line - Desktop */}
-      {!isLast && (
+    <div
+      ref={containerRef}
+      className={`relative ${className}`}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? "translateY(0px)"
+          : "translateY(32px)",
+        transition:
+          "opacity 700ms ease, transform 700ms ease",
+      }}
+    >
+      <div
+        className="relative overflow-hidden rounded-[2.25rem] border px-5 py-6 shadow-[0_24px_65px_rgba(2,6,23,0.32)] sm:px-7 sm:py-7 lg:px-8 lg:py-8"
+        style={{
+          borderColor: `${theme.textColor}14`,
+          background:
+            "linear-gradient(180deg, rgba(15,23,42,0.92) 0%, rgba(11,17,35,0.98) 100%)",
+        }}
+      >
         <div
-          className="absolute left-1/2 transform -translate-x-1/2 w-0.5 z-0 hidden lg:block"
-          style={{
-            backgroundColor: theme.customColors.border,
-            top: "60px",
-            bottom: "-64px",
-          }}
+          className="pointer-events-none absolute inset-0"
+          style={{ background: accentGradient }}
         />
-      )}
 
-      {/* Vertical Timeline Line - Mobile */}
-      {!isLast && (
-        <div
-          className="absolute left-8 w-0.5 z-0 lg:hidden"
-          style={{
-            backgroundColor: theme.customColors.border,
-            top: "60px",
-            bottom: "-32px",
-          }}
-        />
-      )}
-
-      {/* Timeline Content */}
-      <div className="relative z-10">
-        {/* Desktop Layout: Horizontal timeline with alternating sides */}
-        <div className="hidden lg:flex items-center min-h-[280px]">
-          {/* Left Side Content */}
-          <div className="flex-1 pr-16">
-            {isLeft ? (
-              // Left orientation: Icon on left side of timeline
-              <div className="flex items-center justify-end">
-                <div className="w-64 h-64 flex-shrink-0">
-                  {imageSrc && (
-                    <Icon
-                      src={imageSrc}
-                      alt={imageAlt}
-                      width={256}
-                      height={256}
-                      className="w-64 h-64"
-                    />
-                  )}
-                </div>
-              </div>
-            ) : (
-              // Right orientation: Text on left side of timeline
-              <div className="flex items-center justify-end">
-                <div className="text-left space-y-4 max-w-md">
-                  <h2
-                    className="text-2xl lg:text-3xl font-bold leading-tight"
-                    style={{
-                      fontFamily: theme.fontFamily.heading,
-                      color: theme.textColor,
-                    }}
-                  >
-                    {title}
-                  </h2>
-                  <div
-                    className="text-base leading-relaxed"
-                    style={{
-                      fontFamily: theme.fontFamily.body,
-                      color: theme.customColors.muted,
-                    }}
-                  >
-                    {description.split("\n").map((paragraph, index) => (
-                      <p key={index} className={index > 0 ? "mt-4" : ""}>
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Central Timeline Marker */}
-          <div className="relative flex-shrink-0 flex flex-col items-center">
-            {/* Timeline dot */}
-            <div
-              className="w-4 h-4 rounded-full relative z-20"
-              style={{
-                backgroundColor: theme.customColors.primary,
-              }}
-            />
-
-            {/* Horizontal line to content */}
-            <div
-              className={`absolute top-1/2 transform -translate-y-1/2 h-0.5 w-12 ${
-                isLeft ? "right-4" : "left-4"
-              }`}
-              style={{
-                backgroundColor: theme.customColors.border,
-              }}
-            />
-
-            {/* Date label */}
-            <div
-              className="mt-2 text-xs font-medium px-2 py-1 rounded whitespace-nowrap"
-              style={{
-                backgroundColor: theme.customColors.border,
-                color: theme.textColor,
-              }}
-            >
-              {dates}
-            </div>
-          </div>
-
-          {/* Right Side Content */}
-          <div className="flex-1 pl-16">
-            {isLeft ? (
-              // Left orientation: Text on right side of timeline
-              <div className="flex items-center">
-                <div className="text-left space-y-4 max-w-md">
-                  <h2
-                    className="text-2xl lg:text-3xl font-bold leading-tight"
-                    style={{
-                      fontFamily: theme.fontFamily.heading,
-                      color: theme.textColor,
-                    }}
-                  >
-                    {title}
-                  </h2>
-                  <div
-                    className="text-base leading-relaxed"
-                    style={{
-                      fontFamily: theme.fontFamily.body,
-                      color: theme.customColors.muted,
-                    }}
-                  >
-                    {description.split("\n").map((paragraph, index) => (
-                      <p key={index} className={index > 0 ? "mt-4" : ""}>
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              // Right orientation: Icon on right side of timeline
-              <div className="flex items-center">
-                <div className="w-64 h-64 flex-shrink-0">
-                  {imageSrc && (
-                    <Icon
-                      src={imageSrc}
-                      alt={imageAlt}
-                      width={256}
-                      height={256}
-                      className="w-64 h-64"
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Mobile/Tablet Layout: Vertical timeline with logo above text */}
-        <div className="flex lg:hidden">
-          {/* Left Timeline */}
-          <div className="flex flex-col items-center mr-6">
-            {/* Timeline dot */}
-            <div
-              className="w-4 h-4 rounded-full relative z-20"
-              style={{
-                backgroundColor: theme.customColors.primary,
-              }}
-            />
-
-            {/* Date label */}
-            <div
-              className="mt-2 text-xs font-medium px-2 py-1 rounded whitespace-nowrap"
-              style={{
-                backgroundColor: theme.customColors.border,
-                color: theme.textColor,
-              }}
-            >
-              {dates}
-            </div>
-          </div>
-
-          {/* Content: Logo above text */}
-          <div className="flex-1 space-y-4">
-            {/* Logo */}
-            <div className="flex justify-start">
-              <div className="w-20 h-20 sm:w-24 sm:h-24">
-                {imageSrc && (
-                  <Icon
-                    src={imageSrc}
-                    alt={imageAlt}
-                    width={96}
-                    height={96}
-                    className="w-20 h-20 sm:w-24 sm:h-24"
-                  />
-                )}
-              </div>
-            </div>
-
-            {/* Text Content */}
+        <div className="relative space-y-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="space-y-3">
+              <div
+                className="inline-flex items-center rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.26em]"
+                style={{
+                  borderColor: `${theme.textColor}12`,
+                  color: theme.customColors.muted,
+                  backgroundColor: "rgba(15, 23, 42, 0.45)",
+                  fontFamily: theme.fontFamily.heading,
+                }}
+              >
+                {dates}
+              </div>
+
               <h2
-                className="text-xl sm:text-2xl font-bold leading-tight"
+                className="text-2xl font-semibold leading-tight sm:text-3xl lg:text-4xl"
                 style={{
                   fontFamily: theme.fontFamily.heading,
                   color: theme.textColor,
@@ -240,19 +110,63 @@ export default function TimelineItem({
               >
                 {title}
               </h2>
-              <div
-                className="text-sm sm:text-base leading-relaxed"
-                style={{
-                  fontFamily: theme.fontFamily.body,
-                  color: theme.customColors.muted,
-                }}
-              >
-                {description.split("\n").map((paragraph, index) => (
-                  <p key={index} className={index > 0 ? "mt-3" : ""}>
-                    {paragraph}
-                  </p>
-                ))}
+            </div>
+
+            {imageSrc && (
+              <div className="flex lg:justify-end">
+                <div
+                  className="rounded-[2rem] border p-4 backdrop-blur-sm sm:p-5"
+                  style={{
+                    borderColor: `${theme.textColor}10`,
+                    backgroundColor: "rgba(15, 23, 42, 0.38)",
+                  }}
+                >
+                  <Icon
+                    src={imageSrc}
+                    alt={imageAlt}
+                    width={160}
+                    height={160}
+                    className="h-24 w-24 sm:h-28 sm:w-28 lg:h-32 lg:w-32"
+                  />
+                </div>
               </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.14fr)_minmax(0,1fr)] lg:gap-8">
+            <div className="hidden lg:flex lg:justify-center">
+              <div className="flex h-full w-full max-w-[3.5rem] justify-center">
+                <div
+                  className="h-full w-px"
+                  style={{
+                    background: `linear-gradient(180deg, ${theme.customColors.primary}00 0%, ${theme.customColors.primary}70 20%, ${theme.customColors.accent}70 80%, ${theme.customColors.accent}00 100%)`,
+                  }}
+                />
+              </div>
+            </div>
+
+            <div
+              className="space-y-4 rounded-[1.75rem] border p-5 sm:p-6 lg:p-7"
+              style={{
+                borderColor: `${theme.textColor}10`,
+                backgroundColor: "rgba(148, 163, 184, 0.06)",
+              }}
+            >
+              {paragraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="text-base leading-relaxed sm:text-lg"
+                  style={{
+                    fontFamily: theme.fontFamily.body,
+                    color:
+                      index === 0
+                        ? `${theme.textColor}de`
+                        : `${theme.customColors.muted}f2`,
+                  }}
+                >
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         </div>
