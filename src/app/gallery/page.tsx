@@ -402,8 +402,8 @@ export default function Gallery() {
       <div
         className="min-h-screen overflow-hidden"
         style={{
-          backgroundColor: theme.backgroundColor,
-          backgroundImage: `radial-gradient(circle at top left, ${theme.customColors.primary}20 0%, transparent 32%), radial-gradient(circle at 85% 18%, ${theme.customColors.accent}18 0%, transparent 24%), linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(2,6,23,1) 100%)`,
+          background:
+            "linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(15,23,42,1) 35%, rgba(10,15,32,1) 100%)",
         }}
       >
         <div className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-24 lg:pt-14">
