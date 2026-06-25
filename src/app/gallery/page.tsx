@@ -22,6 +22,7 @@ function GalleryLightbox({
   onNext,
   onPrevious,
   textColor,
+  customColors,
 }: {
   imageUrls: string[];
   activeIndex: number;
@@ -29,6 +30,7 @@ function GalleryLightbox({
   onNext: () => void;
   onPrevious: () => void;
   textColor: string;
+  customColors: Record<string, string>;
 }) {
   const activeImage = imageUrls[activeIndex];
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -43,7 +45,8 @@ function GalleryLightbox({
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/88 px-4 py-6 backdrop-blur-md sm:px-8"
+      className="fixed inset-0 z-[70] flex items-center justify-center px-4 py-6 backdrop-blur-md sm:px-8"
+      style={{ backgroundColor: `${customColors.crust}e0` }}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -56,7 +59,7 @@ function GalleryLightbox({
         style={{
           color: textColor,
           borderColor: `${textColor}22`,
-          backgroundColor: "rgba(15, 23, 42, 0.62)",
+          backgroundColor: `${customColors.base}9e`,
         }}
         aria-label="Close lightbox"
       >
@@ -86,7 +89,7 @@ function GalleryLightbox({
         style={{
           color: textColor,
           borderColor: `${textColor}22`,
-          backgroundColor: "rgba(15, 23, 42, 0.62)",
+          backgroundColor: `${customColors.base}9e`,
         }}
         aria-label="Previous image"
       >
@@ -116,7 +119,7 @@ function GalleryLightbox({
         style={{
           color: textColor,
           borderColor: `${textColor}22`,
-          backgroundColor: "rgba(15, 23, 42, 0.62)",
+          backgroundColor: `${customColors.base}9e`,
         }}
         aria-label="Next image"
       >
@@ -140,7 +143,14 @@ function GalleryLightbox({
         className="relative w-full max-w-6xl"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/78 shadow-[0_40px_120px_rgba(2,6,23,0.6)]">
+        <div
+          className="relative overflow-hidden rounded-[2rem] border"
+          style={{
+            borderColor: `${textColor}1a`,
+            backgroundColor: `${customColors.mantle}c7`,
+            boxShadow: `0 40px 120px ${customColors.crust}99`,
+          }}
+        >
           <div className="relative flex max-h-[82vh] min-h-[22rem] items-center justify-center px-4 py-16 sm:px-8">
             <div
               className="absolute inset-0 scale-105 transition-opacity duration-300"
@@ -152,13 +162,18 @@ function GalleryLightbox({
                 opacity: imageLoaded ? 0.18 : 0.4,
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/18 via-slate-950/10 to-slate-950/28" />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(180deg, ${customColors.crust}2e 0%, ${customColors.crust}1a 50%, ${customColors.crust}47 100%)`,
+              }}
+            />
             <div
               className="absolute inset-0 animate-pulse"
               style={{
                 opacity: imageLoaded ? 0 : 1,
                 background:
-                  "linear-gradient(135deg, rgba(148,163,184,0.08) 0%, rgba(255,255,255,0.03) 50%, rgba(148,163,184,0.08) 100%)",
+                  `linear-gradient(135deg, ${customColors.surface1}38 0%, ${customColors.rosewater}0f 50%, ${customColors.surface1}38 100%)`,
                 transition: "opacity 240ms ease-out",
               }}
             />
@@ -167,7 +182,7 @@ function GalleryLightbox({
               style={{
                 color: `${textColor}b3`,
                 borderColor: `${textColor}14`,
-                backgroundColor: "rgba(15, 23, 42, 0.42)",
+                backgroundColor: `${customColors.base}6b`,
                 opacity: imageLoaded ? 0 : 1,
                 transition: "opacity 200ms ease-out",
               }}
@@ -201,7 +216,7 @@ function GalleryLightbox({
                 style={{
                   color: textColor,
                   borderColor: `${textColor}22`,
-                  backgroundColor: "rgba(15, 23, 42, 0.62)",
+                  backgroundColor: `${customColors.base}9e`,
                 }}
               >
                 Prev
@@ -213,7 +228,7 @@ function GalleryLightbox({
                 style={{
                   color: textColor,
                   borderColor: `${textColor}22`,
-                  backgroundColor: "rgba(15, 23, 42, 0.62)",
+                  backgroundColor: `${customColors.base}9e`,
                 }}
               >
                 Next
@@ -402,17 +417,16 @@ export default function Gallery() {
       <div
         className="min-h-screen overflow-hidden"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(15,23,42,1) 35%, rgba(10,15,32,1) 100%)",
+          background: `linear-gradient(180deg, ${theme.customColors.base}f5 0%, ${theme.customColors.base} 35%, ${theme.customColors.mantle} 100%)`,
         }}
       >
         <div className="mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-24 lg:pt-14">
           <section
-            className="relative overflow-hidden rounded-[2.5rem] border px-6 py-8 shadow-[0_30px_90px_rgba(2,6,23,0.45)] sm:px-8 sm:py-10 lg:px-12 lg:py-14"
+            className="relative overflow-hidden rounded-[2.5rem] border px-6 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14"
             style={{
               borderColor: `${theme.textColor}14`,
-              background:
-                "linear-gradient(180deg, rgba(15,23,42,0.92) 0%, rgba(8,15,31,0.98) 100%)",
+              background: `linear-gradient(180deg, ${theme.customColors.surface0}eb 0%, ${theme.customColors.mantle}fa 100%)`,
+              boxShadow: `0 30px 90px ${theme.customColors.crust}73`,
               opacity: contentVisible ? 1 : 0,
               transform: contentVisible ? "translateY(0px)" : "translateY(24px)",
               transition: "opacity 280ms ease-out, transform 360ms ease-out",
@@ -448,30 +462,6 @@ export default function Gallery() {
                 </h1>
 
               </div>
-
-              <div className="flex items-center gap-3 self-start lg:self-auto">
-                <div
-                  className="inline-flex items-center gap-3 rounded-full border px-4 py-3"
-                  style={{
-                    borderColor: `${theme.textColor}18`,
-                    backgroundColor: "rgba(15, 23, 42, 0.48)",
-                  }}
-                >
-                  <span
-                    className="inline-flex h-2.5 w-2.5 rounded-full"
-                    style={{ backgroundColor: theme.customColors.accent }}
-                  />
-                  <span
-                    className="text-sm uppercase tracking-[0.28em]"
-                    style={{
-                      color: `${theme.textColor}b8`,
-                      fontFamily: theme.fontFamily.body,
-                    }}
-                  >
-                    {imageUrls.length} frames
-                  </span>
-                </div>
-              </div>
             </div>
           </section>
 
@@ -490,7 +480,7 @@ export default function Gallery() {
                 className={`${featuredCardShell} relative min-h-[26rem] text-left sm:min-h-[34rem] lg:min-h-[42rem]`}
                 style={{
                   borderColor: `${theme.customColors.primary}45`,
-                  boxShadow: "0 30px 90px rgba(2, 6, 23, 0.4)",
+                  boxShadow: `0 30px 90px ${theme.customColors.crust}66`,
                 }}
               >
                 <Image
@@ -501,7 +491,12 @@ export default function Gallery() {
                   sizes="(max-width: 1024px) 100vw, 65vw"
                   className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/18 to-transparent" />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(0deg, ${theme.customColors.crust} 0%, ${theme.customColors.crust}2e 48%, transparent 100%)`,
+                  }}
+                />
               </button>
             ) : null}
 
@@ -514,7 +509,7 @@ export default function Gallery() {
                   className={`${gridCardShell} min-h-[14rem] text-left sm:min-h-[16rem] lg:min-h-[13rem]`}
                   style={{
                     borderColor: `${theme.textColor}14`,
-                    boxShadow: "0 22px 60px rgba(2, 6, 23, 0.28)",
+                    boxShadow: `0 22px 60px ${theme.customColors.crust}47`,
                   }}
                 >
                   <Image
@@ -524,20 +519,12 @@ export default function Gallery() {
                     sizes="(max-width: 1024px) 33vw, 28vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/10 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-end p-5">
-                    <span
-                      className="rounded-full border px-3 py-1 text-xs uppercase tracking-[0.2em] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-                      style={{
-                        color: theme.textColor,
-                        borderColor: `${theme.textColor}1f`,
-                        backgroundColor: "rgba(15, 23, 42, 0.58)",
-                        transform: "translateY(6px)",
-                      }}
-                    >
-                      Open
-                    </span>
-                  </div>
+                  <div
+                    className="absolute inset-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{
+                      background: `linear-gradient(0deg, ${theme.customColors.crust}d9 0%, ${theme.customColors.crust}1a 58%, transparent 100%)`,
+                    }}
+                  />
                 </button>
               ))}
             </div>
@@ -563,7 +550,7 @@ export default function Gallery() {
                       index % 2 === 0
                         ? `${theme.customColors.primary}30`
                         : `${theme.textColor}12`,
-                    boxShadow: "0 22px 60px rgba(2, 6, 23, 0.22)",
+                    boxShadow: `0 22px 60px ${theme.customColors.crust}38`,
                   }}
                 >
                   <Image
@@ -573,20 +560,12 @@ export default function Gallery() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/88 via-slate-950/10 to-transparent opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5 sm:p-6">
-                    <span
-                      className="rounded-full border px-3 py-1 text-xs uppercase tracking-[0.2em] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-                      style={{
-                        color: theme.textColor,
-                        borderColor: `${theme.textColor}1f`,
-                        backgroundColor: "rgba(15, 23, 42, 0.58)",
-                        transform: "translateY(6px)",
-                      }}
-                    >
-                      Expand
-                    </span>
-                  </div>
+                  <div
+                    className="absolute inset-0 opacity-75 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{
+                      background: `linear-gradient(0deg, ${theme.customColors.crust}e0 0%, ${theme.customColors.crust}1a 58%, transparent 100%)`,
+                    }}
+                  />
                 </button>
               ))}
             </div>
@@ -610,6 +589,7 @@ export default function Gallery() {
             )
           }
           textColor={theme.textColor}
+          customColors={theme.customColors}
         />
       ) : null}
     </>

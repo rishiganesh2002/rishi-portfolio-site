@@ -89,17 +89,17 @@ export default function Navbar({ navigation }: NavbarProps) {
 
   const brandColor = hexToRgba(theme.textColor, 0.92);
   const shellBorderColor = hexToRgba(theme.textColor, 0.12 + scrollProgress * 0.12);
-  const shellShadow = `0 14px 40px ${hexToRgba("#020617", 0.18 + scrollProgress * 0.18)}`;
+  const shellShadow = `0 14px 40px ${hexToRgba(theme.customColors.crust, 0.28 + scrollProgress * 0.18)}`;
   const shellBackground = [
     `linear-gradient(90deg, ${hexToRgba(theme.customColors.primary, 0.08 + scrollProgress * 0.2)} 0%, ${hexToRgba(theme.customColors.accent, 0.05 + scrollProgress * 0.12)} 45%, ${hexToRgba(theme.customColors.secondary, 0.08 + scrollProgress * 0.2)} 100%)`,
-    `linear-gradient(180deg, ${hexToRgba(theme.customColors.border, 0.58 + scrollProgress * 0.18)} 0%, ${hexToRgba("#0f172a", 0.78 + scrollProgress * 0.16)} 100%)`,
+    `linear-gradient(180deg, ${hexToRgba(theme.customColors.surface0, 0.72 + scrollProgress * 0.14)} 0%, ${hexToRgba(theme.customColors.mantle, 0.84 + scrollProgress * 0.12)} 100%)`,
   ].join(", ");
 
   const activeItemBackground = hexToRgba(theme.textColor, 0.1 + scrollProgress * 0.08);
   const mobileButtonBackground = hexToRgba(theme.textColor, 0.08 + scrollProgress * 0.08);
   const mobileMenuBackground = [
     `linear-gradient(180deg, ${hexToRgba(theme.customColors.primary, 0.1 + scrollProgress * 0.12)} 0%, ${hexToRgba(theme.customColors.secondary, 0.08 + scrollProgress * 0.12)} 100%)`,
-    `linear-gradient(180deg, ${hexToRgba(theme.customColors.border, 0.92)} 0%, ${hexToRgba("#0f172a", 0.96)} 100%)`,
+    `linear-gradient(180deg, ${hexToRgba(theme.customColors.surface0, 0.94)} 0%, ${hexToRgba(theme.customColors.mantle, 0.98)} 100%)`,
   ].join(", ");
 
   return (
@@ -116,7 +116,7 @@ export default function Navbar({ navigation }: NavbarProps) {
           <div
             className="pointer-events-none absolute inset-0 opacity-100 transition-opacity duration-300"
             style={{
-              background: `linear-gradient(90deg, ${hexToRgba("#ffffff", 0.05)} 0%, transparent 22%, transparent 78%, ${hexToRgba("#ffffff", 0.04)} 100%)`,
+              background: `linear-gradient(90deg, ${hexToRgba(theme.customColors.rosewater, 0.06)} 0%, transparent 22%, transparent 78%, ${hexToRgba(theme.customColors.lavender, 0.05)} 100%)`,
             }}
           />
 
@@ -150,7 +150,7 @@ export default function Navbar({ navigation }: NavbarProps) {
                         ? activeItemBackground
                         : "transparent",
                       boxShadow: isActive
-                        ? `inset 0 0 0 1px ${hexToRgba("#ffffff", 0.06)}`
+                        ? `inset 0 0 0 1px ${hexToRgba(theme.customColors.lavender, 0.1)}`
                         : "none",
                     }}
                   >

@@ -16,12 +16,12 @@ export default function Footer({ footerData, socialLinks }: FooterProps) {
   return (
     <footer className="px-4 pb-8 pt-10 sm:px-6 lg:px-8 lg:pb-10 lg:pt-14">
       <div
-        className="mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border px-6 py-8 shadow-[0_26px_70px_rgba(2,6,23,0.35)] sm:px-8 sm:py-10 lg:px-14 lg:py-14"
+        className="mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border px-6 py-8 sm:px-8 sm:py-10 lg:px-14 lg:py-14"
         style={{
           color: theme.textColor,
           borderColor: `${theme.textColor}14`,
-          background:
-            "linear-gradient(180deg, rgba(15,23,42,0.94) 0%, rgba(10,15,32,0.98) 100%)",
+          background: `linear-gradient(180deg, ${theme.customColors.surface0}f0 0%, ${theme.customColors.mantle}fa 100%)`,
+          boxShadow: `0 26px 70px ${theme.customColors.crust}59`,
         }}
       >
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)] lg:items-center lg:gap-12">
