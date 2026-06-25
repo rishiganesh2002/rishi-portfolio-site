@@ -15,7 +15,7 @@ export default function ExperiencePage() {
         <div
           className="inline-flex items-center gap-3 rounded-full border px-5 py-3"
           style={{
-            backgroundColor: "rgba(15, 23, 42, 0.85)",
+            backgroundColor: `${theme.customColors.base}d9`,
             borderColor: `${theme.textColor}18`,
             color: theme.textColor,
           }}
@@ -83,17 +83,16 @@ export default function ExperiencePage() {
     <div
       className="min-h-screen"
       style={{
-        background:
-          "linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(15,23,42,1) 35%, rgba(10,15,32,1) 100%)",
+        background: `linear-gradient(180deg, ${theme.customColors.base}f5 0%, ${theme.customColors.base} 35%, ${theme.customColors.mantle} 100%)`,
       }}
     >
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <section
-          className="overflow-hidden rounded-[2.75rem] border px-6 py-8 shadow-[0_28px_90px_rgba(2,6,23,0.36)] sm:px-8 sm:py-10 lg:px-10 lg:py-12"
+          className="overflow-hidden rounded-[2.75rem] border px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
           style={{
             borderColor: `${theme.textColor}12`,
-            background:
-              "linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(10,15,32,0.98) 100%)",
+            background: `linear-gradient(180deg, ${theme.customColors.surface0}e6 0%, ${theme.customColors.mantle}fa 100%)`,
+            boxShadow: `0 28px 90px ${theme.customColors.crust}5c`,
           }}
         >
           <div

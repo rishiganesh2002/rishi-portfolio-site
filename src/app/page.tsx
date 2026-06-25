@@ -75,7 +75,7 @@ export default function Home() {
         <div className="text-center">
           <div className="text-2xl mb-4">⚠️</div>
           <div>Error loading website information</div>
-          <div className="text-sm text-gray-500 mt-2">
+          <div className="text-sm text-[#a6adc8] mt-2">
             Please try refreshing the page
           </div>
         </div>

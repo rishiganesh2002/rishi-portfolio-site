@@ -74,11 +74,11 @@ export default function TimelineItem({
       }}
     >
       <div
-        className="relative overflow-hidden rounded-[2.25rem] border px-5 py-6 shadow-[0_24px_65px_rgba(2,6,23,0.32)] sm:px-7 sm:py-7 lg:px-8 lg:py-8"
+        className="relative overflow-hidden rounded-[2.25rem] border px-5 py-6 sm:px-7 sm:py-7 lg:px-8 lg:py-8"
         style={{
           borderColor: `${theme.textColor}14`,
-          background:
-            "linear-gradient(180deg, rgba(15,23,42,0.92) 0%, rgba(11,17,35,0.98) 100%)",
+          background: `linear-gradient(180deg, ${theme.customColors.surface0}eb 0%, ${theme.customColors.mantle}fa 100%)`,
+          boxShadow: `0 24px 65px ${theme.customColors.crust}52`,
         }}
       >
         <div
@@ -94,7 +94,7 @@ export default function TimelineItem({
                 style={{
                   borderColor: `${theme.textColor}12`,
                   color: theme.customColors.muted,
-                  backgroundColor: "rgba(15, 23, 42, 0.45)",
+                  backgroundColor: `${theme.customColors.base}73`,
                   fontFamily: theme.fontFamily.heading,
                 }}
               >
@@ -118,7 +118,7 @@ export default function TimelineItem({
                   className="rounded-[2rem] border p-4 backdrop-blur-sm sm:p-5"
                   style={{
                     borderColor: `${theme.textColor}10`,
-                    backgroundColor: "rgba(15, 23, 42, 0.38)",
+                    backgroundColor: `${theme.customColors.base}61`,
                   }}
                 >
                   <Icon
@@ -149,7 +149,7 @@ export default function TimelineItem({
               className="space-y-4 rounded-[1.75rem] border p-5 sm:p-6 lg:p-7"
               style={{
                 borderColor: `${theme.textColor}10`,
-                backgroundColor: "rgba(148, 163, 184, 0.06)",
+                backgroundColor: `${theme.customColors.surface1}26`,
               }}
             >
               {paragraphs.map((paragraph, index) => (

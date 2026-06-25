@@ -69,9 +69,8 @@ export default function PersonalEthos({
       className="mx-auto w-full max-w-7xl overflow-hidden rounded-[2.5rem] border px-6 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14"
       style={{
         borderColor: `${theme.customColors.primary}35`,
-        background:
-          "linear-gradient(180deg, rgba(15,23,42,0.92) 0%, rgba(10,15,32,0.96) 100%)",
-        boxShadow: "0 26px 70px rgba(2, 6, 23, 0.42)",
+        background: `linear-gradient(180deg, ${theme.customColors.surface0}eb 0%, ${theme.customColors.mantle}f5 100%)`,
+        boxShadow: `0 26px 70px ${theme.customColors.crust}6b`,
       }}
     >
       <div
@@ -120,7 +119,7 @@ export default function PersonalEthos({
                 className="rounded-[2rem] border px-5 py-5 transition-all duration-500 ease-out sm:px-7"
                 style={{
                   borderColor: `${theme.textColor}16`,
-                  backgroundColor: "rgba(148, 163, 184, 0.08)",
+                  backgroundColor: `${theme.customColors.surface1}33`,
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible
                     ? "translateX(0)"
@@ -131,7 +130,7 @@ export default function PersonalEthos({
                   <span
                     className="min-w-[2.25rem] pt-0.5 text-xl font-semibold"
                     style={{
-                      color: "#9ec5e5",
+                      color: theme.customColors.sapphire,
                       fontFamily: theme.fontFamily.heading,
                     }}
                   >

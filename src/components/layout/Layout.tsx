@@ -61,7 +61,7 @@ function LayoutContent({ children }: LayoutProps) {
       className="min-h-screen flex flex-col"
       style={{
         background: isHomePage
-          ? `linear-gradient(180deg, #374151 0%, #374151 40%, #1e293b 70%, ${theme.backgroundColor} 100%)`
+          ? `linear-gradient(180deg, ${theme.customColors.surface0} 0%, ${theme.customColors.base} 42%, ${theme.customColors.mantle} 72%, ${theme.customColors.crust} 100%)`
           : theme.backgroundColor,
       }}
     >

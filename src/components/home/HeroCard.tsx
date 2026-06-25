@@ -20,10 +20,11 @@ export default function HeroCard({ homeData, socialLinks }: HeroCardProps) {
 
   return (
     <div
-      className="relative overflow-hidden rounded-[2.25rem] border px-6 py-8 shadow-[0_24px_60px_rgba(2,6,23,0.45)] sm:px-8 sm:py-10 lg:min-h-[38rem] lg:px-10 lg:py-12"
+      className="relative overflow-hidden rounded-[2.25rem] border px-6 py-8 sm:px-8 sm:py-10 lg:min-h-[38rem] lg:px-10 lg:py-12"
       style={{
         borderColor: `${theme.customColors.primary}55`,
-        background: `linear-gradient(180deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.9) 100%)`,
+        background: `linear-gradient(180deg, ${theme.customColors.surface0}f2 0%, ${theme.customColors.mantle}e6 100%)`,
+        boxShadow: `0 24px 60px ${theme.customColors.crust}73`,
       }}
     >
       <div
@@ -50,7 +51,7 @@ export default function HeroCard({ homeData, socialLinks }: HeroCardProps) {
               className="max-w-[12ch] bg-gradient-to-r bg-clip-text text-5xl font-semibold leading-[0.95] text-transparent sm:text-6xl lg:text-7xl"
               style={{
                 fontFamily: theme.fontFamily.heading,
-                backgroundImage: `linear-gradient(135deg, ${theme.textColor} 0%, #d8f7f6 42%, #cce8b8 72%, #f2d85b 100%)`,
+                backgroundImage: `linear-gradient(135deg, ${theme.textColor} 0%, ${theme.customColors.sky} 42%, ${theme.customColors.green} 72%, ${theme.customColors.yellow} 100%)`,
               }}
             >
               {homeData.headline}
@@ -87,7 +88,7 @@ export default function HeroCard({ homeData, socialLinks }: HeroCardProps) {
                 className="inline-flex items-center gap-3 rounded-full border px-4 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   borderColor: `${theme.textColor}20`,
-                  backgroundColor: "rgba(15, 23, 42, 0.45)",
+                  backgroundColor: `${theme.customColors.base}73`,
                   color: theme.textColor,
                   fontFamily: theme.fontFamily.body,
                 }}
